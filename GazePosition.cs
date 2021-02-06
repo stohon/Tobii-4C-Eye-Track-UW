@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace GaveAndBodyTrack
 {
     public class GazePosition
-    {
+    { 
         public GazePosition ()
         {
             this.HasValue = false;
