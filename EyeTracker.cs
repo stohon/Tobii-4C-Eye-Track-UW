@@ -4,7 +4,7 @@ using Windows.Devices.Input.Preview;
 namespace GaveAndBodyTrack
 {
     public delegate void EyeTracker_GazeMoved();
-
+     
     public class EyeTracker
     {
         public event EyeTracker_GazeMoved GazeMoved;
