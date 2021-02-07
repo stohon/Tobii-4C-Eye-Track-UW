@@ -32,7 +32,8 @@ namespace GaveAndBodyTrack
 
             displayInformation = DisplayInformation.GetForCurrentView();
             screenSize = new Size((int)displayInformation.ScreenWidthInRawPixels,
-                                                   (int)displayInformation.ScreenHeightInRawPixels);
+                                  (int)displayInformation.ScreenHeightInRawPixels);
+
             screenSizeInchesWidth = screenSize.Width / displayInformation.RawDpiX;
             screenSizeInchesHeight = screenSize.Height / displayInformation.RawDpiY;
 
@@ -40,21 +41,37 @@ namespace GaveAndBodyTrack
             screenSizeMicrometersHeight = screenSizeInchesHeight * 25400;
 
             _tracker.GazeMoved += Tracker_GazeMoved;
-            
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            //var conversionFactorX = (displayInformation.RawDpiX / displayInformation.RawPixelsPerViewPixel) / 25.4;
-            //var conversionFactorY = (displayInformation.RawDpiY / displayInformation.RawPixelsPerViewPixel) / 25.4;
+            
         }
 
         private void Tracker_GazeMoved()
         {
-            txtStatus.Text = _tracker.GazePosition.X + " , " + _tracker.GazePosition.Y;
+            //txtStatus.Text = _tracker.GazePosition.X + " , " + _tracker.GazePosition.Y;
+            //txtStatus.Text = _tracker.LeftEyePosition.Z.ToString();
 
             Canvas.SetLeft(imgFatBird, _tracker.GazePosition.X);
             Canvas.SetTop(imgFatBird, _tracker.GazePosition.Y);
+
+            if (_tracker.LeftEyePosition.Z > 300000 && _tracker.LeftEyePosition.Z < 900000)
+            {
+                var newX = MapRange(0, screenSizeMicrometersWidth, 0, ActualWidth, _tracker.LeftEyePosition.X);
+                var newY = MapRange(0, screenSizeMicrometersHeight, 0, ActualHeight, _tracker.LeftEyePosition.Y);
+
+                Canvas.SetLeft(LeftEyePositionEllipse, newX);
+                Canvas.SetTop(LeftEyePositionEllipse, newY);
+                decimal scaleFactor = (decimal)_tracker.LeftEyePosition.Z / (decimal)600000;
+                LeftEyePositionEllipse.Width = (double)((_tracker.LeftEyePosition.Z / 3000) * scaleFactor);
+                LeftEyePositionEllipse.Height = (double)((_tracker.LeftEyePosition.Z / 3000) * scaleFactor);
+
+                //txtStatus.Text = newX + " , " + newY;
+            }
+
+            /*Canvas.SetLeft(txtStatus, _tracker.GazePosition.X);
+            Canvas.SetTop(txtStatus, _tracker.GazePosition.Y);*/
 
             //var newX = MapRange(0, screenSizeMicrometersWidth, 0, ActualWidth, _tracker.GazePosition.X);
             //var newY = MapRange(0, screenSizeMicrometersHeight, 0, ActualHeight, _tracker.GazePosition.Y);

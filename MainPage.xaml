@@ -11,18 +11,18 @@
     Loaded="Page_Loaded">
 
     <Grid>
-        <TextBox x:Name="txtStatus" FontSize="40" HorizontalAlignment="Left" Margin="90,10,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Height="70" Width="1317"/>
         <Canvas>
-            <Image x:Name="imgFatBird" HorizontalAlignment="Left" Height="100" Canvas.Top="10" Canvas.Left="10" VerticalAlignment="Top" Width="100" Source="Assets/FatBird.png">
+            <Image x:Name="imgFatBird" HorizontalAlignment="Left" Height="50" Canvas.Top="10" Canvas.Left="10" VerticalAlignment="Top" Width="50" Source="Assets/FatBird.png" Stretch="Fill">
                 <Image.RenderTransform>
                     <TranslateTransform X="-50" Y="-50"/>
                 </Image.RenderTransform>
             </Image>
-            <Ellipse x:Name="GazePositionEllipse" Opacity="0.5" Width="100" Height="100" Canvas.Top="10" Canvas.Left="10" Fill="red" VerticalAlignment="Top" HorizontalAlignment="Left" ManipulationMode="System">
+            <Ellipse x:Name="LeftEyePositionEllipse" Opacity="0.5" Width="100" Height="100" Canvas.Top="10" Canvas.Left="10" Fill="red" VerticalAlignment="Top" HorizontalAlignment="Left" ManipulationMode="System">
                 <Ellipse.RenderTransform>
                     <TranslateTransform X="-50" Y="-50"/>
                 </Ellipse.RenderTransform>
             </Ellipse>
+            <TextBox x:Name="txtStatus" Canvas.Left="208" Canvas.Top="163" Text="TextBox" TextWrapping="Wrap" Height="49" Width="133"/>
         </Canvas>
     </Grid>
 </Page>
