@@ -7,8 +7,8 @@
     <ProjectGuid>{D7FE2802-28CD-4989-8F9F-AE4E45174366}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>GaveAndBodyTrack</RootNamespace>
-    <AssemblyName>GaveAndBodyTrack</AssemblyName>
+    <RootNamespace>GazeAndBodyTrack</RootNamespace>
+    <AssemblyName>GazeAndBodyTrack</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
@@ -119,12 +119,14 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Enums.cs" />
     <Compile Include="EyeTracker.cs" />
+    <Compile Include="HeadPosition.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="GazePosition.cs" />
-    <Compile Include="EyeHeadPosition.cs" />
+    <Compile Include="EyePosition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScreenDetails.cs" />
   </ItemGroup>

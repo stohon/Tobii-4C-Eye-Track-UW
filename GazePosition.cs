@@ -4,11 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GaveAndBodyTrack
+namespace GazeAndBodyTrack
 {
     public class GazePosition
     { 
         public GazePosition ()
+        {
+            this.Clear();
+        }
+        public void Clear()
         {
             this.HasValue = false;
             this.X = 0;

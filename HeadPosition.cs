@@ -1,11 +1,16 @@
 ﻿using Microsoft.Toolkit.Uwp.Input.GazeInteraction.GazeHidParsers;
 using Windows.Devices.Input.Preview;
 
-namespace GaveAndBodyTrack
+namespace GazeAndBodyTrack
 {
-    public class EyeHeadPosition
+    public class HeadPosition
     {
-        public EyeHeadPosition()
+        public HeadPosition()
+        {
+            this.Clear();
+        }
+
+        public void Clear()
         {
             this.HasValue = false;
             this.X = 0;

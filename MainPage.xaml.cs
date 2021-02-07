@@ -8,7 +8,7 @@ using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media;
 
-namespace GaveAndBodyTrack
+namespace GazeAndBodyTrack
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -25,14 +25,29 @@ namespace GaveAndBodyTrack
 
             _screenDetails = new ScreenDetails(this);
             _tracker.GazeMoved += Tracker_GazeMoved;
+            _tracker.GazeExited += Tracker_GazeExited;
+            _tracker.Blink += _tracker_Blink;
+        }
+
+        private void _tracker_Blink(BlinkType blinkType)
+        {
+            txtStatus.Text += blinkType.ToString() + ";"; 
+        }
+
+        private void Tracker_GazeExited()
+        {
+            //txtStatus.Text = "exit" + _tracker.LeftEyePosition.HasValue.ToString();
         }
 
         private void Page_Loaded(object sender, RoutedEventArgs e) { }
 
         private void Tracker_GazeMoved()
         {
+            //imgFatBird.Visibility = (_tracker.GazePosition.HasValue) ? Visibility.Visible : Visibility.Collapsed;
             Canvas.SetLeft(imgFatBird, _tracker.GazePosition.X);
             Canvas.SetTop(imgFatBird, _tracker.GazePosition.Y);
+
+            //txtStatus.Text = _tracker.HeadPosition.Z + " , " + _tracker.HeadRotatePosition.Z;
 
             if (_tracker.LeftEyePosition.Z > 300000 && _tracker.LeftEyePosition.Z < 900000)
             {

@@ -8,7 +8,7 @@ using System.Drawing;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml;
 
-namespace GaveAndBodyTrack
+namespace GazeAndBodyTrack
 {
     public class ScreenDetails
     {
