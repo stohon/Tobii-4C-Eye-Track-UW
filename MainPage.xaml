@@ -22,6 +22,11 @@
                     <TranslateTransform X="-50" Y="-50"/>
                 </Ellipse.RenderTransform>
             </Ellipse>
+            <Ellipse x:Name="RightEyePositionEllipse" Opacity="0.5" Width="100" Height="100" Canvas.Top="10" Canvas.Left="10" Fill="red" VerticalAlignment="Top" HorizontalAlignment="Left" ManipulationMode="System">
+                <Ellipse.RenderTransform>
+                    <TranslateTransform X="-50" Y="-50"/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
             <TextBox x:Name="txtStatus" Canvas.Left="208" Canvas.Top="163" Text="TextBox" TextWrapping="Wrap" Height="49" Width="133"/>
         </Canvas>
     </Grid>

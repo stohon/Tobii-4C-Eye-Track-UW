@@ -126,6 +126,7 @@
     <Compile Include="GazePosition.cs" />
     <Compile Include="EyeHeadPosition.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ScreenDetails.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

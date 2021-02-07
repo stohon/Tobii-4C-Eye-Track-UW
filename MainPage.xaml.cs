@@ -16,75 +16,55 @@ namespace GaveAndBodyTrack
     /// 
     public sealed partial class MainPage : Page
     {
+        ScreenDetails _screenDetails;
         EyeTracker _tracker = new EyeTracker();
-
-        private DisplayInformation displayInformation;
-        Size screenSize;
-        float screenSizeInchesWidth;
-        float screenSizeInchesHeight;
-
-        float screenSizeMicrometersWidth;
-        float screenSizeMicrometersHeight;
 
         public MainPage()
         {
             this.InitializeComponent();
 
-            displayInformation = DisplayInformation.GetForCurrentView();
-            screenSize = new Size((int)displayInformation.ScreenWidthInRawPixels,
-                                  (int)displayInformation.ScreenHeightInRawPixels);
-
-            screenSizeInchesWidth = screenSize.Width / displayInformation.RawDpiX;
-            screenSizeInchesHeight = screenSize.Height / displayInformation.RawDpiY;
-
-            screenSizeMicrometersWidth = screenSizeInchesWidth * 25400;
-            screenSizeMicrometersHeight = screenSizeInchesHeight * 25400;
-
+            _screenDetails = new ScreenDetails(this);
             _tracker.GazeMoved += Tracker_GazeMoved;
         }
 
-        private void Page_Loaded(object sender, RoutedEventArgs e)
-        {
-            
-        }
+        private void Page_Loaded(object sender, RoutedEventArgs e) { }
 
         private void Tracker_GazeMoved()
         {
-            //txtStatus.Text = _tracker.GazePosition.X + " , " + _tracker.GazePosition.Y;
-            //txtStatus.Text = _tracker.LeftEyePosition.Z.ToString();
-
             Canvas.SetLeft(imgFatBird, _tracker.GazePosition.X);
             Canvas.SetTop(imgFatBird, _tracker.GazePosition.Y);
 
             if (_tracker.LeftEyePosition.Z > 300000 && _tracker.LeftEyePosition.Z < 900000)
             {
-                var newX = MapRange(0, screenSizeMicrometersWidth, 0, ActualWidth, _tracker.LeftEyePosition.X);
-                var newY = MapRange(0, screenSizeMicrometersHeight, 0, ActualHeight, _tracker.LeftEyePosition.Y);
+                LeftEyePositionEllipse.Visibility = Visibility.Visible;
 
-                Canvas.SetLeft(LeftEyePositionEllipse, newX);
-                Canvas.SetTop(LeftEyePositionEllipse, newY);
+                Canvas.SetLeft(LeftEyePositionEllipse, _tracker.LeftEyePosition.X * _screenDetails.ScreenWidthMicrometersScaleFactor);
+                Canvas.SetTop(LeftEyePositionEllipse, _tracker.LeftEyePosition.Y * _screenDetails.ScreenHeightMicrometersScaleFactor);
+
                 decimal scaleFactor = (decimal)_tracker.LeftEyePosition.Z / (decimal)600000;
                 LeftEyePositionEllipse.Width = (double)((_tracker.LeftEyePosition.Z / 3000) * scaleFactor);
                 LeftEyePositionEllipse.Height = (double)((_tracker.LeftEyePosition.Z / 3000) * scaleFactor);
-
-                //txtStatus.Text = newX + " , " + newY;
+            }
+            else
+            {
+                LeftEyePositionEllipse.Visibility = Visibility.Collapsed;
             }
 
-            /*Canvas.SetLeft(txtStatus, _tracker.GazePosition.X);
-            Canvas.SetTop(txtStatus, _tracker.GazePosition.Y);*/
+            if (_tracker.RightEyePosition.Z > 300000 && _tracker.RightEyePosition.Z < 900000)
+            {
+                RightEyePositionEllipse.Visibility = Visibility.Visible;
 
-            //var newX = MapRange(0, screenSizeMicrometersWidth, 0, ActualWidth, _tracker.GazePosition.X);
-            //var newY = MapRange(0, screenSizeMicrometersHeight, 0, ActualHeight, _tracker.GazePosition.Y);
+                Canvas.SetLeft(RightEyePositionEllipse, _tracker.RightEyePosition.X * _screenDetails.ScreenWidthMicrometersScaleFactor);
+                Canvas.SetTop(RightEyePositionEllipse, _tracker.RightEyePosition.Y * _screenDetails.ScreenHeightMicrometersScaleFactor);
 
-            //Canvas.SetLeft(GazePositionEllipse, newX);
-            //Canvas.SetTop(GazePositionEllipse, newY);
-
-        }
-
-        private static double MapRange(double oldStart, double oldEnd, double newStart, double newEnd, double valueToMap)
-        {
-            double scalingFactor = (newEnd - newStart) / (oldEnd - oldStart);
-            return newStart + ((valueToMap - oldStart) * scalingFactor);
+                decimal scaleFactor2 = (decimal)_tracker.RightEyePosition.Z / (decimal)600000;
+                RightEyePositionEllipse.Width = (double)((_tracker.RightEyePosition.Z / 3000) * scaleFactor2);
+                RightEyePositionEllipse.Height = (double)((_tracker.RightEyePosition.Z / 3000) * scaleFactor2);
+            }
+            else
+            {
+                RightEyePositionEllipse.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
