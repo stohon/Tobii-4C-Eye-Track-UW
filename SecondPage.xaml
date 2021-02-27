@@ -1,0 +1,31 @@
+﻿<Page
+    x:Class="GazeAndBodyTrack.SecondPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:GazeAndBodyTrack"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid Background="Black" Loaded="Grid_Loaded">
+
+        <Image x:Name="img1" Source=".\Assets\bot.jpg" HorizontalAlignment="Left" Height="346" Margin="522,273,0,0" VerticalAlignment="Top" Width="407" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+
+        </Image>
+
+        <Button x:Name="btnBot" Height="559" Width="474">
+            <StackPanel>
+                <Image Source=".\Assets\bot.jpg" x:Name="btnImage" />
+                <TextBlock>Disconnect from Server</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button  Margin="1159,159,0,0" Foreground="AliceBlue" Content="Click" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Click="Button_Click">
+            <Button.RenderTransform>
+                <CompositeTransform Rotation="44.36"/>
+            </Button.RenderTransform>
+        </Button>
+        <TextBox x:Name="txtFileName" HorizontalAlignment="Left" Margin="303,106,0,0" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Top" Height="41" Width="350"/>
+
+    </Grid>
+</Page>
